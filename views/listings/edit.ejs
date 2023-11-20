@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<%- include("../layouts/includes/navbar.ejs") %>
+    <main class="p-4 w-2/3 border m-auto">
+    <h1 class="text-3xl">Edit listing</h1>
+    <form class="space-y-8" action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+        <div class="flex mt-2">
+        <label for="title">Title: </label>
+        <input class="flex-1" name="title" id="title" type="text" placeholder="Enter the Title" required value="<%= listing.title %>"><br>
+        </div>
+
+        <div>
+        <label for="description">Description: </label><br>
+        <textarea class="w-full" name="description" id="description" placeholder="Write some description"><%= listing.description  %></textarea><br>
+        </div>
+
+        <label for="price">Price: </label>
+        <input name="price" id="price" type="number" placeholder="Enter the price" required value="<%= listing.price %>"><br>
+
+        <div class="flex mt-2">
+        <label for="image">Image url: </label>
+        <input class="flex-1" name="image" id="image" type="text" placeholder="Enter the Image url" value="<%= listing.image %>"><br>
+        </div>
+
+        <label for="country">Country: </label>
+        <input name="country" id="country" type="text" placeholder="Enter the country" value="<%= listing.country %>">
+
+        <label for="location">Location: </label>
+        <input name="location" id="location" type="location" placeholder="Enter the location" required value="<%= listing.location %>"><br>
+
+        <button class="bg-red-600 p-1 px-2 rounded-md font-semibold text-white hover:">submit</button>
+    </form>
+    </main>
+    <%- include("../layouts/includes/footer.ejs") %>

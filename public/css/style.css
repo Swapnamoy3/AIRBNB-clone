@@ -1,0 +1,74 @@
+/* body{
+    background-color: cornflowerblue;
+} */
+*{
+    transition: .1s;
+}
+
+
+.logo{
+    font-family: 'Dancing Script', cursive;
+}
+
+
+
+nav{
+    position: sticky;
+    width: 100%;
+    top: 0;
+}
+
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}
+
+.label{
+    font-size: 1.5rem !important;
+    margin-right: 5px;
+}
+.input{
+    font-size: 1.5rem !important;
+    color: rgba(42, 42, 42, 0.881) !important;
+    border: 1px solid rgba(78, 78, 78, 0.495);
+    border-radius: .35rem !important;
+    padding-left: 2px !important;
+    font-size: 1.2rem !important;
+    outline: 0 !important;
+    height: 2.5rem !important;
+    padding: 5px;
+}
+.textarea{
+    font-size: 1.5rem !important;
+    border: 1px solid rgba(78, 78, 78, 0.495);
+    border-radius: .15rem !important;
+    padding-left: 2px !important;
+    font-size: 1.2rem !important;
+
+
+
+}
+ 
+.input:valid{
+    border: 1px solid green;
+    background-color: rgba(1, 186, 1, 0.066); 
+    box-shadow: 0 0 2px  rgba(1, 186, 1, 0.811);
+    
+}
+
+.input:invalid:focus{
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.068);
+    box-shadow: 0 0 2px  rgba(255, 0, 0, 0.811);
+
+} /**/
+
+hr{
+    color:"black" !important;
+    
+}

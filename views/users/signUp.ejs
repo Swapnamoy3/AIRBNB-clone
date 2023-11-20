@@ -1,0 +1,31 @@
+<%- layout("/layouts/boilerplate.ejs") %>
+
+<%- include("../layouts/includes/navbar.ejs") %>
+
+
+<main class="w-2/3 mx-auto">
+    <h1 class="text-2xl font-semibold">Sign Up to WanderLust</h1>
+    <form action="/signUp" method="POST">
+
+        <div class=" mt-4 username">
+            <label class="text-xl" for="username">Username</label><br>
+            <input class="mt-2 border border-gray-400 bg-gray-100 w-full py-3 px-2 rounded-md" required type="text" id="username" name="username">
+        </div>
+
+        <div class=" mt-4 email">
+            <label class="text-xl" for="email">Email</label><br>
+            <input class="mt-2 border border-gray-400 bg-gray-100 w-full py-3 px-2 rounded-md" required type="email" id="email" name="email">
+        </div>
+
+        <div class=" mt-4 password">
+            <label class="text-xl" for="password">Password</label><br>
+            <input class="mt-2 border border-gray-400 bg-gray-100 w-full py-3 px-2 rounded-md" required type="password" id="password" name="password">
+        </div>
+
+        <button class="bg-black m-3 text-white px-3 py-2 rounded-md font-semibold" type="submit">submit</button>
+
+    </form>
+</main>
+
+
+<%- include("../layouts/includes/footer.ejs") %>

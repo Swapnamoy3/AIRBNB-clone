@@ -1,0 +1,41 @@
+<% layout("/layouts/boilerplate.ejs") %>
+    <%- include("../layouts/includes/navbar.ejs") %>
+        <main class="p-4 w-2/3 border m-auto">
+            <h1 class="text-3xl">Create new listing</h1>
+            <form class="space-y-8 needs-validation" action="/listings" method="POST"  >
+                <div class=" mt-2">
+                    <label for="title">Title: </label>
+                    <input class=" w-full input"  name="title" id="title" type="text" placeholder="Enter the Title" required><br>
+                </div>
+
+                <div>
+                    <label for="description">Description: </label><br>
+                    <textarea class="w-full textarea" name="description" id="description"
+                        placeholder="Write some description"></textarea><br>
+                </div>
+
+                <div class=" mt-2">
+                    <label for="image">Image url: </label>
+                    <input class="w-full " name="image" id="image" type="text" placeholder="Enter the Image url"><br>
+                </div>
+
+                <div class="flex space-x-3">
+                    <div class="flex-1">
+                        <label for="price">Price: </label><br>
+                        <input class="w-full input" name="price" id="price" type="number" placeholder="Enter the price" required><br>
+                    </div>
+
+                    <div class="flex-1">
+                        <label for="country">Country: </label><br>
+                        <input class="w-full" name="country" id="country" type="text" placeholder="Enter the country"> <br class="xl:hidden">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="location">Location: </label>
+                    <input class="w-full input" name="location" id="location" type="location" placeholder="Enter the location" required><br>
+                </div>
+                <button class="bg-red-600 font-semibold p-1 px-6 rounded-md  text-white hover:">Add</button>
+            </form>
+        </main>
+        <%- include("../layouts/includes/footer.ejs") %>

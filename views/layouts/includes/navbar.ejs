@@ -1,0 +1,23 @@
+<nav class="p-6 mb-3 flex justify-between bg-gray-50 navbar shadow-md sticky-top">
+    <div class=" flex">
+    <span class="text-pink-600 text-2xl font-semibold mr-2 logo"><a href="/listings"><i class="fa-solid fa-compass mr-1"></i>WanderLust</a></span>
+        <ul class="flex m-1 space-x-4 text-gray-600 font-semibold text-xl max-sm:hidden">
+            <li class="hover:text-black"><a href="/listings">Listings</a></li>
+            <li class="hover:text-black">Contact us</li>
+            <li class="hover:text-black">About us</li>
+            <li class="hover:text-black"><a href="/listings/new">Add new Listing</a></li>
+        </ul>
+    </div>
+    <div class=" text-xl space-x-2">
+        <% if(!user){  %>
+            <a href="/signUp">SignUp</a>
+            <a href="/login">Login</a>
+        <% }else {  %>
+            <a href="/logout">Logout</a>
+        <% } %>
+
+          </div>
+    <span class="menu active:shadow-inner sm:hidden px-1 rounded-sm"><i class="fa-solid fa-bars   text-3xl "></i></span>
+</nav>
+
+<%-include("./flash.ejs")%>
