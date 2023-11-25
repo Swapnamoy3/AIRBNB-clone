@@ -6,7 +6,7 @@ const {listingSchema, reviewSchema} = require("../schema.js");
 const Listing = require("../models/listing.js");
 const Review = require("../models/reviews.js");
 const {isLoggedIn} = require("../middleware.js");
-
+const {is_owner} = require("../middleware.js");
 
 
 
@@ -48,6 +48,7 @@ router.post("/",listingValidator,wrapAsync(async (req,res)=>{
     console.log(listing)
 
     let newListing = new Listing(listing);
+    newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success","new listing is added");
     res.redirect("/listings");
@@ -57,7 +58,7 @@ router.post("/",listingValidator,wrapAsync(async (req,res)=>{
 
 router.get("/:id",wrapAsync(async (req,res)=>{
     let {id}=req.params;
-    let listing = await Listing.findById(id).populate("reviews");
+    let listing = await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
     if(!listing){
         req.flash("error","Listing does not exist");
         res.redirect("/listings");
@@ -67,7 +68,7 @@ router.get("/:id",wrapAsync(async (req,res)=>{
 }))
 
 //Edit Listing
-router.get("/:id/edit",isLoggedIn,wrapAsync(async (req,res)=>{
+router.get("/:id/edit",isLoggedIn,is_owner,wrapAsync(async (req,res)=>{
     let {id}=req.params;
     let listing = await Listing.findById(id);
     if(!listing){
@@ -78,7 +79,7 @@ router.get("/:id/edit",isLoggedIn,wrapAsync(async (req,res)=>{
 }))
 
 //UPDATE route
-router.put("/:id",isLoggedIn,listingValidator,wrapAsync(async (req,res)=>{
+router.put("/:id",isLoggedIn,is_owner,listingValidator,wrapAsync(async (req,res)=>{
     let {id}=req.params;
     let listing = req.body;
     await Listing.findByIdAndUpdate(id,listing,{runValidators:true});
@@ -87,9 +88,10 @@ router.put("/:id",isLoggedIn,listingValidator,wrapAsync(async (req,res)=>{
 }))
 
 //DELETE route
-router.delete("/:id",isLoggedIn,wrapAsync(async (req,res)=>{
+router.delete("/:id",isLoggedIn,is_owner,wrapAsync(async (req,res)=>{
 
     let {id}=req.params;
+
     await Listing.findOneAndDelete({_id:id});
     req.flash("success","Listing Deleted");
     res.redirect("/listings");

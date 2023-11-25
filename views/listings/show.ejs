@@ -6,17 +6,28 @@
             <ul class="space-y-1">
                 <li class="my-2"><img class="mx-auto w-full h-auto	 rounded-lg" src="<%= listing.image %>" alt=""></li>
                 <li class="text-xl font-semibold"><%= listing.title  %></li>
+                <li><i>Owned By: <%= listing.owner.username %></i></li>
                 <li><span class="font-semibold">Description: </span><%= listing.description  %></li>
                 <li><span class="font-semibold">Price:: </span> &#8377 <%= (listing.price).toLocaleString("en-in") %></li>
                 <li><span class="font-semibold">Country: </span><%= listing.country  %></li>
                 <li><span class="font-semibold">Location: </span><%= listing.location  %></li>
             </ul>
+
+            <% if(user && user._id.equals(listing.owner._id)){ %>
             <div class="flex mt-2 justify-around">
             <form class="bg-red-600 p-1 px-6 rounded-md font-semibold text-white hover:" action="/listings/<%= listing._id %>/edit"><button>Edit</button></form>
             <form class="bg-black p-1 px-6 rounded-md font-semibold text-white hover:" action="/listings/<%= listing._id %>?_method=DELETE" method="post"><button>Delete</button></form>
             </div>
+            <% } %>
         </div>
+
+
+
         <hr class="my-4 bg-gray-400  mx-auto" style="height: 1px ;" width="80%" >
+        
+        
+        <% if(user){ %>
+        
         <div class="show w-[55rem] m-auto">
 
             <h1 class="text-3xl mb-2 font-bold"> Leave a Review</h1>
@@ -36,14 +47,14 @@
             </form>
 
         </div>
-
+<% } %>
         <div class="all_reviews show w-[55rem] m-auto my-4 mt-4">
             <h1 class="text-3xl font-semibold">All reviews</h1>
 
             <ul class="mt-4 grid grid-cols-2 ">
                 <% for(let review of listing.reviews) {%>
                     <li class="card border m-auto rounded-md my-2 w-[98%] p-2">
-                        <span class="block font-bold ">Swapnamoy Garai</span>
+                        <span class="block font-bold ">@<%= review.author.username %></span>
                         <span> <%= review.comment %></span><br>
                         <span> <%= review.rating  %> stars </span>
                         <form action="/listings/<%= listing._id %>/reviews/<%= review._id%>" method="POST"><button class=" text-white bg-black my-2 p-1 px-3 rounded-md">Delete</button></form>
