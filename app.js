@@ -84,11 +84,6 @@ app.use((req,res,next)=>{
 })
 
 //routes
-
-
-
-
-
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter)
 app.use("/",userRouter)

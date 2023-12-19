@@ -30,27 +30,26 @@ function listingValidator(req,res,next){
 }
 
 
-// INDEX route
-router.get("/", wrapAsync(ListingsController.index))
+// INDEX and CREATE LISTING route
+router.route("/")
+    .get( wrapAsync(ListingsController.index))
+    .post(listingValidator,wrapAsync(ListingsController.CreateNewListing));
 
-//NEW route
 
 router.get("/new",isLoggedIn,wrapAsync(ListingsController.RenderNewListingForm))
 
-router.post("/",listingValidator,wrapAsync(ListingsController.CreateNewListing))
 
-//SHOW route
 
-router.get("/:id",wrapAsync(ListingsController.showListing))
+//SHOW , UPDATE , DESTROY
+router.route("/:id")
+    .get(wrapAsync(ListingsController.showListing))
+    .put(isLoggedIn,is_owner,listingValidator,wrapAsync(ListingsController.UpdateListing))
+    .delete(isLoggedIn,is_owner,wrapAsync(ListingsController.DeleteListing));
+
 
 //Edit Listing
 router.get("/:id/edit",isLoggedIn,is_owner,wrapAsync(ListingsController.EditListing));
 
-//UPDATE route
-router.put("/:id",isLoggedIn,is_owner,listingValidator,wrapAsync(ListingsController.UpdateListing))
-
-//DELETE route
-router.delete("/:id",isLoggedIn,is_owner,wrapAsync(ListingsController.DeleteListing));
 
 
 module.exports= router
