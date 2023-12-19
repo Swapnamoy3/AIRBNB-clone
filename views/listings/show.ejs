@@ -54,7 +54,7 @@
             <ul class="mt-4 grid grid-cols-2 ">
                 <% for(let review of listing.reviews) {%>
                     <li class="card border m-auto rounded-md my-2 w-[98%] p-2">
-                        <span class="block font-bold ">@<%= review.author.username %></span>
+                        <span class="block font-bold ">@<%=review.author.username%></span>  
                         <span> <%= review.comment %></span><br>
                         <span> <%= review.rating  %> stars </span>
                         <form action="/listings/<%= listing._id %>/reviews/<%= review._id%>" method="POST"><button class=" text-white bg-black my-2 p-1 px-3 rounded-md">Delete</button></form>
