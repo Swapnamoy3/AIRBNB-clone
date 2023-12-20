@@ -47,10 +47,13 @@ module.exports.DeleteListing = async (req,res)=>{
 
 module.exports.CreateNewListing = async (req,res)=>{
     if(!req.body) throw new ExpressError(400,"enter valid data for listing");
+    let url = req.file.path;
+    let filename = req.file.filename;
     let listing = req.body;
     console.log(listing)
 
     let newListing = new Listing(listing);
+    newListing.image = {url,filename};
     newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success","new listing is added");

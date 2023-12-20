@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != "production")//whole file can access this from single decleration
+    require("dotenv").config();
+
+
 const express=require("express")
 const app=express();
 const path = require("path")

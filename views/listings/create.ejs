@@ -2,7 +2,7 @@
     <%- include("../layouts/includes/navbar.ejs") %>
         <main class="p-4 w-2/3 border m-auto">
             <h1 class="text-3xl">Create new listing</h1>
-            <form class="space-y-8 needs-validation" action="/listings" method="POST"  >
+            <form class="space-y-8 needs-validation" action="/listings" method="POST" enctype="multipart/form-data" >
                 <div class=" mt-2">
                     <label for="title">Title: </label>
                     <input class=" w-full input"  name="title" id="title" type="text" placeholder="Enter the Title" required><br>
@@ -13,10 +13,15 @@
                     <textarea class="w-full textarea" name="description" id="description"
                         placeholder="Write some description"></textarea><br>
                 </div>
-
+<!-- for urlencoded form
                 <div class=" mt-2">
                     <label for="image">Image url: </label>
                     <input class="w-full " name="image" id="image" type="text" placeholder="Enter the Image url"><br>
+                </div> -->
+<!-- for multipart form -->
+                <div class=" mt-2">
+                    <label for="image">Image Upload: </label>
+                    <input class="w-full " name="image" id="image" type="file"><br>
                 </div>
 
                 <div class="flex space-x-3">

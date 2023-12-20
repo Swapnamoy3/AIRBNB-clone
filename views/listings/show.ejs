@@ -4,7 +4,7 @@
         <div class="show w-[55rem] m-auto">
             <h3 class="text-3xl my-4">Listing Details: </h3>
             <ul class="space-y-1">
-                <li class="my-2"><img class="mx-auto w-full h-auto	 rounded-lg" src="<%= listing.image %>" alt=""></li>
+                <li class="my-2"><img class="mx-auto w-full h-auto	 rounded-lg" src="<%= listing.image.url %>" alt=""></li>
                 <li class="text-xl font-semibold"><%= listing.title  %></li>
                 <li><i>Owned By: <%= listing.owner.username %></i></li>
                 <li><span class="font-semibold">Description: </span><%= listing.description  %></li>
@@ -34,8 +34,20 @@
             <form action="/listings/<%= listing._id %>/reviews" method="POST">
                 
                 <div class="rating">
-                    <label class="" for="rating">Rating</label><br>
-                    <input class="w-full mb-1 h-2 appearance-none bg-gray-200 rounded-sm  cursor-pointer" type="range" name="rating" id="rating" min=1 max=5>
+                    <b class="" for="rating">Rating</b><br>
+                    <fieldset class="starability-slot">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value=1  aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="rating" checked value="1"  />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                      </fieldset>
                 </div>
 
                 <div class="comments my-3">
@@ -57,6 +69,7 @@
                         <span class="block font-bold ">@<%=review.author.username%></span>  
                         <span> <%= review.comment %></span><br>
                         <span> <%= review.rating  %> stars </span>
+                        <span class="">  <p class="starability-result" data-rating="<%= review.rating  %>"> </span>
                         <form action="/listings/<%= listing._id %>/reviews/<%= review._id%>" method="POST"><button class=" text-white bg-black my-2 p-1 px-3 rounded-md">Delete</button></form>
                     </li>
                 <% } %>

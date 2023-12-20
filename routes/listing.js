@@ -10,7 +10,10 @@ const {is_owner} = require("../middleware.js");
 const ListingsController = require("../controllers/listings.js")
 
 
-
+const multer = require("multer")
+const {storage} = require("../cloudConfig.js");
+const   upload = multer({ storage })
+ 
 
 
 
@@ -33,7 +36,8 @@ function listingValidator(req,res,next){
 // INDEX and CREATE LISTING route
 router.route("/")
     .get( wrapAsync(ListingsController.index))
-    .post(listingValidator,wrapAsync(ListingsController.CreateNewListing));
+    .post(isLoggedIn,listingValidator,upload.single("image") ,wrapAsync(ListingsController.CreateNewListing));
+    //upload.single("image") -> saves image
 
 
 router.get("/new",isLoggedIn,wrapAsync(ListingsController.RenderNewListingForm))

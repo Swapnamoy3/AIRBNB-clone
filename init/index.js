@@ -33,6 +33,6 @@ async function initDB() {
 
 //main()
 // cleanDB().then(()=>{
-// initDB();
+initDB();
 
 // })
